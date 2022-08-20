@@ -1,3 +1,5 @@
+-- created by E.Domínguez
+
 conky.config = {
     use_xft = true,
     xftalpha = 0.8,
@@ -44,13 +46,14 @@ conky.config = {
     template0 = [[${font Iosevka Nerd Font:size=10:bold}\1${font}]],
 };
 
---El comando playerctl -p chromium metadata no muestra ni informacion alguna, en firefox si que funciona, si quieres mostrar datos de otra app como spotify o vlc usa el mismo comando: playerctl -p app metadata
---Soy un puto genio, ni idea de programar y me acabo de hacer un script para la portada. Cambia el nombre del *.png generado por playerctl a cover.png para poder meterlo al conky. Se actualiza solo en bucle.
+-- I use firefox to listen music, but you can use "playerctl -p spotify metadata" for example or other possibilities: vlc, lollypop, etc. 
+-- To display the cover art I use a bash script, which renames the *.png files in the ~/.mozilla/firefox/firefox-mpris directory. Only for firefox
+
 conky.text = [[
 ${if_running firefox}\
-${exec sh /home/edu/Scripts/rename_cover_firefox_mpris.sh}
+${exec sh ~/.config/conky/rename_cover_firefox_mpris.sh}
 ${font}${offset 105}${voffset 0}${font GE Feather:size=12:bold}${exec playerctl -p firefox metadata title}
 ${offset 105}${voffset 0}${font GE Feather:size=9}${exec playerctl -p firefox metadata album}
 ${offset 105}${voffset 0}${font GE Feather:size=9:italic}${exec playerctl -p firefox metadata artist}
-${image /home/edu/.mozilla/firefox/firefox-mpris/cover.png}${else}${color1}${alignr}${font}ﱙ${color}${endif}
+${image ~/.mozilla/firefox/firefox-mpris/cover.png}${else}${color1}${alignr}${font}ﱙ${color}${endif}
 ]]
