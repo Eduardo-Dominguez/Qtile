@@ -1,0 +1,52 @@
+-- conky script by @shokao
+-- remember to check bash folder and scripts
+
+conky.config = {
+    use_xft = true,
+    xftalpha = 0.8,
+    update_interval = 1.0,
+    total_run_times = 0,
+    own_window = true,
+    own_window_transparent = false,    --Trasparencia
+    own_window_colour = 'EEE2C8',      --Color de fondo
+    own_window_argb_visual = true,
+    own_window_type = 'override',-- # options are: normal/override/dock/desktop/panel
+    own_window_class = 'Conky',
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    background = false,
+    double_buffer = true,
+    imlib_cache_size = 0,
+    no_buffers = true,
+    uppercase = false,
+    cpu_avg_samples = 6,
+    use_spacer = true,
+    override_utf8_locale = true,
+
+    -- placement
+    alignment = 'tl',
+    gap_x = 5,
+    gap_y = 60,
+
+    -- default drawing
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = true,
+    border_width = 2,
+    draw_graph_borders = true,
+    default_bar_width = 0, default_bar_height = 0,
+    default_graph_width = 0, default_graph_height = 0,
+    default_gauge_width = 0, default_gauge_height = 0,
+
+    -- colors
+    font = 'Iosevka Nerd Font:size=10:bold',
+    default_color = '000000',
+    color1 = 'c74236',
+    color2 = '262729',
+    color3 = '1B820C',
+
+    template0 = [[${font Iosevka Nerd Font:size=10:bold}\1${font}]],
+};
+conky.text = [[
+${voffset 5}${color1}${color} ${uptime_short} ${color1}${color} ${freq_g}GHz${color} ${loadgraph 9,30 00b09b 96c93d} (${color2}${cpu cpu0}% ${color1}﨎${color2}${acpitemp}°C${color}) ${color1}${color} ${mem} ${membar 9,30}   ${color1}${if_existing /proc/net/route wlp4s0}${color1}直${color} ${wireless_essid wlp4s0} (${color3}${execi 5 sh ~/.config/conky/upordown.sh www.google.com}${color}) ${wireless_link_bar 9,30 wlp4s0} ${color2}${wireless_link_qual_perc wlp4s0}%${color} ${color1}  ${color}${totaldown wlp4s0}${color} ${downspeedgraph wlp4s0 9,15 00b09b 96c93d}${color2} ${downspeed wlp4s0}${color1} ${color} ${totalup wlp4s0} ${upspeedgraph wlp4s0 9,15 00b09b 96c93d}${color2} ${upspeed wlp4s0}${color}${else}${color1}睊${color2} Disconnected ${endif}${color}${if_existing /proc/net/route eth0}${color1}${color} ${addr eth0} (${color2}${execi 5 sh ~/Documents/conky/scripts/upordown.sh www.google.com}${color}) ${color1} ${color}${totaldown eth0}${color} ${downspeedgraph eth0 9,15 00b09b 96c93d} ${color2}${downspeed eth0}${color1} ${color}${totalup wlp4s0} ${upspeedgraph eth0 9,15 00b09b 96c93d} ${color2}${upspeed eth0}${color} ${else}${color1}  ${endif} ${if_match "${execi 5 sh ~/.config/conky/upordown.sh www.google.com}" == ""}${else}${endif}${color}${color}${execp bash ~/.config/conky/mounted_drives.sh}
+]]
+

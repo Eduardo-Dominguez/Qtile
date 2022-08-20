@@ -1,0 +1,56 @@
+conky.config = {
+    use_xft = true,
+    xftalpha = 0.8,
+    update_interval = 1.0,
+    total_run_times = 0,
+    own_window = true,
+    own_window_transparent = false,    --Trasparencia
+    own_window_colour = 'EEE2C8',      --Color de fondo
+    own_window_argb_visual = true,
+    own_window_type = 'override',-- # options are: normal/override/dock/desktop/panel
+    own_window_class = 'Conky',
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    background = false,
+    double_buffer = true,
+    imlib_cache_size = 0,
+    no_buffers = true,
+    uppercase = false,
+    cpu_avg_samples = 6,
+    use_spacer = true,
+    override_utf8_locale = true,
+
+    -- placement
+    alignment = 'tl',
+    gap_x = 5,
+    gap_y = 105,
+
+    -- default drawing
+    draw_shades = false,
+    draw_outline = false,
+    draw_borders = true,
+    border_width = 2,
+    draw_graph_borders = true,
+    default_bar_width = 0, default_bar_height = 0,
+    default_graph_width = 0, default_graph_height = 0,
+    default_gauge_width = 0, default_gauge_height = 0,
+
+    -- colors
+    font = 'Iosevka Nerd Font:size=10:bold',
+    default_color = '000000',
+    color1 = 'c74236',
+    color2 = '58606B',
+    color3 = '262729',
+
+    template0 = [[${font Iosevka Nerd Font:size=10:bold}\1${font}]],
+};
+
+--El comando playerctl -p chromium metadata no muestra ni informacion alguna, en firefox si que funciona, si quieres mostrar datos de otra app como spotify o vlc usa el mismo comando: playerctl -p app metadata
+--Soy un puto genio, ni idea de programar y me acabo de hacer un script para la portada. Cambia el nombre del *.png generado por playerctl a cover.png para poder meterlo al conky. Se actualiza solo en bucle.
+conky.text = [[
+${if_running firefox}\
+${exec sh /home/edu/Scripts/rename_cover_firefox_mpris.sh}
+${font}${offset 105}${voffset 0}${font GE Feather:size=12:bold}${exec playerctl -p firefox metadata title}
+${offset 105}${voffset 0}${font GE Feather:size=9}${exec playerctl -p firefox metadata album}
+${offset 105}${voffset 0}${font GE Feather:size=9:italic}${exec playerctl -p firefox metadata artist}
+${image /home/edu/.mozilla/firefox/firefox-mpris/cover.png}${else}${color1}${alignr}${font}ﱙ${color}${endif}
+]]
