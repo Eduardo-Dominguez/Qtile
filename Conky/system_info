@@ -1,5 +1,6 @@
 -- conky script by @shokao
 -- remember to check bash folder and scripts
+-- custom by E.Domínguez
 
 conky.config = {
     use_xft = true,
